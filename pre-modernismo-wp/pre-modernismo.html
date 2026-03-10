@@ -1,0 +1,1347 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pré-Modernismo — Brasil 1900–1922</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=IM+Fell+English:ital@0;1&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sepia-deep: #2C1A0E;
+    --sepia-mid: #5C3A1E;
+    --sepia-warm: #8B5A2B;
+    --sepia-light: #C4956A;
+    --sepia-pale: #E8D5B0;
+    --sepia-paper: #F5EDD6;
+    --sepia-cream: #FBF6EC;
+    --ink: #1A0F07;
+    --gold: #B8860B;
+    --gold-bright: #DAA520;
+    --red-accent: #7B2D1E;
+    --green-muted: #4A5E3A;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: var(--sepia-paper);
+    color: var(--ink);
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 18px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── GRAIN OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.5;
+  }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: var(--sepia-pale); }
+  ::-webkit-scrollbar-thumb { background: var(--sepia-warm); border-radius: 4px; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(44,26,14,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--gold);
+    padding: 0 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+  }
+  .nav-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--sepia-pale);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+  .nav-links a {
+    color: var(--sepia-light);
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-family: 'Crimson Pro', serif;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold-bright); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 6rem 2rem 4rem;
+    background: var(--sepia-deep);
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 40%, #3d2210 0%, #1a0f07 70%),
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(184,134,11,0.03) 2px,
+        rgba(184,134,11,0.03) 4px
+      );
+  }
+
+  .hero-ornament {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    border: 1px solid rgba(184,134,11,0.15);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    animation: rotate-slow 60s linear infinite;
+  }
+  .hero-ornament::before {
+    content: '';
+    position: absolute;
+    inset: 30px;
+    border-radius: 50%;
+    border: 1px solid rgba(184,134,11,0.08);
+  }
+  .hero-ornament::after {
+    content: '';
+    position: absolute;
+    inset: 80px;
+    border-radius: 50%;
+    border: 1px solid rgba(184,134,11,0.05);
+  }
+  @keyframes rotate-slow { to { transform: translate(-50%, -50%) rotate(360deg); } }
+
+  .hero-eyebrow {
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fade-up 1s 0.3s forwards;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.5rem, 9vw, 8rem);
+    font-weight: 900;
+    color: var(--sepia-cream);
+    text-align: center;
+    line-height: 1.0;
+    position: relative;
+    z-index: 1;
+    opacity: 0;
+    animation: fade-up 1s 0.5s forwards;
+    text-shadow: 0 4px 40px rgba(184,134,11,0.3);
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--sepia-light);
+  }
+
+  .hero-year {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1rem, 2vw, 1.4rem);
+    color: var(--sepia-warm);
+    letter-spacing: 0.5em;
+    text-align: center;
+    margin-top: 1.5rem;
+    position: relative;
+    z-index: 1;
+    opacity: 0;
+    animation: fade-up 1s 0.7s forwards;
+  }
+
+  .hero-divider {
+    width: 120px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 2.5rem auto;
+    position: relative;
+    z-index: 1;
+    opacity: 0;
+    animation: fade-up 1s 0.9s forwards;
+  }
+  .hero-divider::before {
+    content: '◆';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--gold);
+    font-size: 0.6rem;
+    background: var(--sepia-deep);
+    padding: 0 6px;
+  }
+
+  .hero-desc {
+    max-width: 640px;
+    text-align: center;
+    color: var(--sepia-pale);
+    font-size: 1.15rem;
+    font-style: italic;
+    line-height: 1.9;
+    position: relative;
+    z-index: 1;
+    opacity: 0;
+    animation: fade-up 1s 1.1s forwards;
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--sepia-warm);
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    opacity: 0;
+    animation: fade-up 1s 1.5s forwards;
+    z-index: 1;
+  }
+  .hero-scroll span { animation: bounce 2s ease-in-out infinite; }
+  @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(6px)} }
+
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SECTION BASE ── */
+  section { padding: 7rem 2rem; }
+
+  .container { max-width: 1100px; margin: 0 auto; }
+  .container-narrow { max-width: 760px; margin: 0 auto; }
+
+  .section-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.75rem;
+    font-family: 'Crimson Pro', serif;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 700;
+    color: var(--sepia-deep);
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+  }
+  .section-title em { font-style: italic; color: var(--sepia-warm); }
+
+  .ruled-line {
+    width: 60px;
+    height: 2px;
+    background: var(--gold);
+    margin-bottom: 2.5rem;
+  }
+
+  /* ── INTRO / CONTEXTO ── */
+  #contexto {
+    background: var(--sepia-cream);
+    border-top: 4px double var(--sepia-light);
+  }
+
+  .contexto-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .contexto-text p {
+    margin-bottom: 1.2rem;
+    color: var(--sepia-mid);
+  }
+
+  .contexto-aside {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .fact-card {
+    background: var(--sepia-deep);
+    color: var(--sepia-pale);
+    padding: 1.8rem;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s;
+  }
+  .fact-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--gold);
+  }
+  .fact-card:hover { transform: translateX(6px); }
+  .fact-card .num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+  .fact-card .label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--sepia-light);
+    margin-bottom: 0.5rem;
+  }
+  .fact-card p {
+    font-size: 0.9rem;
+    color: var(--sepia-pale);
+    opacity: 0.85;
+  }
+
+  /* ── CARACTERÍSTICAS ── */
+  #caracteristicas {
+    background: var(--sepia-paper);
+    border-top: 1px solid var(--sepia-pale);
+  }
+
+  .caract-header { text-align: center; margin-bottom: 4rem; }
+  .caract-header .ruled-line { margin: 0 auto 2.5rem; }
+
+  .caract-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: var(--sepia-light);
+  }
+
+  .caract-item {
+    background: var(--sepia-cream);
+    padding: 2.5rem 2rem;
+    transition: background 0.4s, transform 0.4s;
+    cursor: default;
+  }
+  .caract-item:hover {
+    background: var(--sepia-deep);
+    transform: scale(1.02);
+    z-index: 1;
+  }
+  .caract-item:hover .caract-num,
+  .caract-item:hover .caract-title,
+  .caract-item:hover .caract-body {
+    color: var(--sepia-pale);
+  }
+  .caract-item:hover .caract-num { color: var(--gold); }
+
+  .caract-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem;
+    font-weight: 900;
+    color: var(--sepia-pale);
+    line-height: 1;
+    margin-bottom: 0.75rem;
+    transition: color 0.4s;
+  }
+  .caract-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--sepia-deep);
+    margin-bottom: 0.75rem;
+    transition: color 0.4s;
+  }
+  .caract-body {
+    font-size: 0.9rem;
+    color: var(--sepia-mid);
+    line-height: 1.7;
+    transition: color 0.4s;
+  }
+
+  /* ── ARTISTAS ── */
+  #artistas {
+    background: var(--sepia-deep);
+    padding: 7rem 2rem;
+  }
+  #artistas .section-title { color: var(--sepia-pale); }
+  #artistas .section-label { color: var(--gold); }
+
+  .artists-header { margin-bottom: 4rem; }
+
+  .artists-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .artist-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(184,134,11,0.2);
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.4s, background 0.4s;
+    cursor: pointer;
+  }
+  .artist-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s;
+  }
+  .artist-card:hover {
+    border-color: rgba(184,134,11,0.6);
+    background: rgba(255,255,255,0.06);
+  }
+  .artist-card:hover::after { transform: scaleX(1); }
+
+  .artist-area {
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.6rem;
+  }
+  .artist-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--sepia-cream);
+    margin-bottom: 0.25rem;
+  }
+  .artist-years {
+    font-size: 0.85rem;
+    color: var(--sepia-warm);
+    font-style: italic;
+    margin-bottom: 1rem;
+    display: block;
+  }
+  .artist-desc {
+    font-size: 0.9rem;
+    color: var(--sepia-pale);
+    opacity: 0.75;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+  .artist-obras {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+  .obra-tag {
+    font-size: 0.7rem;
+    background: rgba(184,134,11,0.12);
+    border: 1px solid rgba(184,134,11,0.25);
+    color: var(--sepia-light);
+    padding: 0.2rem 0.6rem;
+    border-radius: 2px;
+    letter-spacing: 0.05em;
+    font-style: italic;
+  }
+
+  /* ── OBRAS ── */
+  #obras {
+    background: var(--sepia-cream);
+    border-top: 4px double var(--sepia-light);
+  }
+
+  .obras-intro { margin-bottom: 4rem; }
+
+  .obras-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .obra-item {
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    align-items: center;
+    gap: 2rem;
+    padding: 1.8rem 0;
+    border-bottom: 1px solid var(--sepia-pale);
+    transition: background 0.3s;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    cursor: default;
+  }
+  .obra-item:hover { background: var(--sepia-paper); }
+  .obra-item:first-child { border-top: 1px solid var(--sepia-pale); }
+
+  .obra-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--sepia-pale);
+    text-align: right;
+    line-height: 1;
+  }
+  .obra-info .obra-title-main {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-style: italic;
+    color: var(--sepia-deep);
+    margin-bottom: 0.2rem;
+  }
+  .obra-info .obra-author {
+    font-size: 0.85rem;
+    color: var(--sepia-warm);
+    letter-spacing: 0.05em;
+    margin-bottom: 0.4rem;
+  }
+  .obra-info .obra-notes {
+    font-size: 0.85rem;
+    color: var(--sepia-mid);
+  }
+  .obra-year-badge {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--gold);
+    white-space: nowrap;
+    text-align: right;
+  }
+
+  /* ── MOVIMENTOS / ESCOLAS ── */
+  #movimentos {
+    background: var(--sepia-paper);
+    border-top: 1px solid var(--sepia-pale);
+  }
+
+  .mov-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .mov-card {
+    padding: 2.5rem;
+    border-left: 3px solid var(--sepia-light);
+    background: var(--sepia-cream);
+    position: relative;
+    transition: border-color 0.3s;
+  }
+  .mov-card:hover { border-left-color: var(--gold); }
+  .mov-card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--sepia-deep);
+    margin-bottom: 0.5rem;
+  }
+  .mov-card-sub {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+  .mov-card p {
+    font-size: 0.95rem;
+    color: var(--sepia-mid);
+    line-height: 1.7;
+  }
+
+  /* ── CONTEXTO HISTÓRICO ── */
+  #historia {
+    background: var(--sepia-deep);
+    color: var(--sepia-pale);
+  }
+
+  .timeline {
+    position: relative;
+    margin-top: 3rem;
+    padding-left: 3rem;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+  }
+
+  .tl-item {
+    position: relative;
+    margin-bottom: 3rem;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.6s, transform 0.6s;
+  }
+  .tl-item.visible { opacity: 1; transform: translateX(0); }
+
+  .tl-item::before {
+    content: '';
+    position: absolute;
+    left: -3rem;
+    top: 0.4rem;
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    background: var(--gold);
+    box-shadow: 0 0 12px var(--gold);
+    transform: translateX(-4px);
+  }
+
+  .tl-year {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 0.3rem;
+  }
+  .tl-event {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--sepia-cream);
+    margin-bottom: 0.4rem;
+  }
+  .tl-desc {
+    font-size: 0.9rem;
+    color: var(--sepia-pale);
+    opacity: 0.7;
+    max-width: 560px;
+  }
+
+  /* ── CITAÇÃO ── */
+  .quote-section {
+    background: var(--sepia-cream);
+    padding: 6rem 2rem;
+    text-align: center;
+  }
+  blockquote {
+    max-width: 760px;
+    margin: 0 auto;
+  }
+  blockquote p {
+    font-family: 'IM Fell English', Georgia, serif;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-style: italic;
+    color: var(--sepia-deep);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    position: relative;
+  }
+  blockquote p::before {
+    content: '\201C';
+    font-size: 6rem;
+    color: var(--sepia-pale);
+    position: absolute;
+    left: -2rem; top: -1rem;
+    line-height: 1;
+    font-family: 'Playfair Display', serif;
+  }
+  blockquote cite {
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  /* ── TEMAS LITERÁRIOS ── */
+  #temas {
+    background: var(--sepia-paper);
+  }
+
+  .temas-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .tema-card {
+    text-align: center;
+    padding: 2rem 1rem;
+    border: 1px solid var(--sepia-pale);
+    background: var(--sepia-cream);
+    transition: all 0.4s;
+  }
+  .tema-card:hover {
+    background: var(--sepia-deep);
+    border-color: var(--gold);
+  }
+  .tema-card:hover .tema-icon,
+  .tema-card:hover .tema-name,
+  .tema-card:hover .tema-text { color: var(--sepia-pale); }
+  .tema-card:hover .tema-icon { color: var(--gold); }
+
+  .tema-icon {
+    font-size: 2.2rem;
+    display: block;
+    margin-bottom: 0.75rem;
+    color: var(--sepia-warm);
+    transition: color 0.4s;
+  }
+  .tema-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--sepia-deep);
+    margin-bottom: 0.5rem;
+    transition: color 0.4s;
+  }
+  .tema-text {
+    font-size: 0.82rem;
+    color: var(--sepia-mid);
+    line-height: 1.6;
+    transition: color 0.4s;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    color: var(--sepia-warm);
+    text-align: center;
+    padding: 3rem 2rem;
+    border-top: 2px solid var(--gold);
+  }
+  footer .f-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--sepia-pale);
+    margin-bottom: 0.5rem;
+  }
+  footer p {
+    font-size: 0.85rem;
+    opacity: 0.6;
+    margin-bottom: 0.3rem;
+  }
+  footer .f-years {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--gold);
+    letter-spacing: 0.3em;
+    margin-top: 1rem;
+  }
+
+  /* ── BACK TO TOP ── */
+  .back-top {
+    position: fixed;
+    bottom: 2rem; right: 2rem;
+    width: 44px; height: 44px;
+    background: var(--sepia-deep);
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s, background 0.3s;
+    z-index: 50;
+    font-size: 1.1rem;
+  }
+  .back-top.show { opacity: 1; }
+  .back-top:hover { background: var(--gold); color: var(--sepia-deep); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .contexto-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .caract-grid { grid-template-columns: 1fr 1fr; }
+    .mov-grid { grid-template-columns: 1fr; }
+    .temas-grid { grid-template-columns: repeat(2, 1fr); }
+    nav { padding: 0 1.5rem; }
+    .nav-links { display: none; }
+    .obra-item { grid-template-columns: 50px 1fr; }
+    .obra-year-badge { display: none; }
+  }
+  @media (max-width: 600px) {
+    .caract-grid { grid-template-columns: 1fr; }
+    .temas-grid { grid-template-columns: 1fr 1fr; }
+    .artists-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-brand">Pré-Modernismo</span>
+  <ul class="nav-links">
+    <li><a href="#contexto">Contexto</a></li>
+    <li><a href="#caracteristicas">Características</a></li>
+    <li><a href="#artistas">Autores</a></li>
+    <li><a href="#obras">Obras</a></li>
+    <li><a href="#movimentos">Escolas</a></li>
+    <li><a href="#historia">História</a></li>
+    <li><a href="#temas">Temas</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="hero-bg"></div>
+  <div class="hero-ornament"></div>
+  <span class="hero-eyebrow">Literatura Brasileira</span>
+  <h1 class="hero-title">Pré-<em>Modernismo</em></h1>
+  <p class="hero-year">1900 — 1922</p>
+  <div class="hero-divider"></div>
+  <p class="hero-desc">
+    O período de transição entre o academismo do século XIX e a eclosão revolucionária da Semana de Arte Moderna.
+    Uma época de contradições, de realismo social e de vozes que clamavam por uma nova forma de ver o Brasil.
+  </p>
+  <div class="hero-scroll">
+    <span>▾</span> Explorar
+  </div>
+</section>
+
+<!-- CONTEXTO -->
+<section id="contexto">
+  <div class="container">
+    <div class="contexto-grid">
+      <div class="contexto-text">
+        <p class="section-label">01 — Panorama</p>
+        <h2 class="section-title">O Brasil na <em>virada do século</em></h2>
+        <div class="ruled-line"></div>
+        <p>O Pré-Modernismo compreende o período entre o final do século XIX e 1922, quando a Semana de Arte Moderna rompeu definitivamente com os padrões estéticos vigentes. É um momento de transição marcado pela coexistência de diferentes escolas literárias.</p>
+        <p>A literatura deste período reflete as profundas transformações sociais pelas quais o Brasil passava: a proclamação da República (1889), a abolição da escravatura (1888), a chegada de imigrantes europeus, a industrialização incipiente e o surgimento de uma classe operária urbana.</p>
+        <p>Diferente das fases anteriores — Romantismo, Realismo, Parnasianismo e Simbolismo — o Pré-Modernismo não constitui uma escola literária propriamente dita, mas sim um período de convivência e tensão entre correntes. Os autores compartilham o olhar crítico sobre a realidade brasileira e o interesse pelo marginalizado.</p>
+        <p>O sertão, os pobres urbanos, os imigrantes e os excluídos tornam-se protagonistas literários, antecipando o espírito renovador que floresceria no Modernismo.</p>
+      </div>
+      <div class="contexto-aside">
+        <div class="fact-card">
+          <div class="num">1889</div>
+          <div class="label">Proclamação da República</div>
+          <p>A mudança do regime monárquico para republicano gerou profunda crise de identidade nacional, combustível para a literatura da época.</p>
+        </div>
+        <div class="fact-card">
+          <div class="num">1888</div>
+          <div class="label">Abolição da Escravatura</div>
+          <p>A Lei Áurea liberta formalmente os escravizados, mas sem políticas de integração, gerando miséria urbana que a literatura retrata.</p>
+        </div>
+        <div class="fact-card">
+          <div class="num">1922</div>
+          <div class="label">Semana de Arte Moderna</div>
+          <p>Marco que encerra o período pré-modernista e inaugura oficialmente o Modernismo brasileiro em São Paulo.</p>
+        </div>
+        <div class="fact-card">
+          <div class="num">22+</div>
+          <div class="label">Anos de Produção</div>
+          <p>Mais de duas décadas de produção literária que prepararam o terreno para a revolução estética modernista.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CARACTERÍSTICAS -->
+<section id="caracteristicas">
+  <div class="container">
+    <div class="caract-header">
+      <p class="section-label">02 — Estética</p>
+      <h2 class="section-title">Características <em>do Período</em></h2>
+      <div class="ruled-line"></div>
+    </div>
+    <div class="caract-grid">
+      <div class="caract-item">
+        <div class="caract-num">I</div>
+        <div class="caract-title">Regionalismo Crítico</div>
+        <p class="caract-body">Valorização das particularidades regionais do Brasil, especialmente do Nordeste e do interior, com uma perspectiva crítica sobre as desigualdades sociais e as condições de vida da população pobre.</p>
+      </div>
+      <div class="caract-item">
+        <div class="caract-num">II</div>
+        <div class="caract-title">Denúncia Social</div>
+        <p class="caract-body">Compromisso com a exposição das mazelas sociais brasileiras: o fanatismo religioso, o coronelismo, a seca, a miséria do sertanejo, as condições subumanas dos pobres urbanos e do imigrante.</p>
+      </div>
+      <div class="caract-item">
+        <div class="caract-num">III</div>
+        <div class="caract-title">Ruptura com o Academismo</div>
+        <p class="caract-body">Afastamento gradual dos modelos estéticos parnasianos e simbolistas, com uma linguagem mais direta, menos ornamental, voltada para a verossimilhança e a crítica social.</p>
+      </div>
+      <div class="caract-item">
+        <div class="caract-num">IV</div>
+        <div class="caract-title">Personagens Marginalizados</div>
+        <p class="caract-body">Protagonismo dado às figuras excluídas da sociedade: o sertanejo, o mulato, o caboclo, o operário, o imigrante, o louco. A literatura desce do pedestal e olha para o chão.</p>
+      </div>
+      <div class="caract-item">
+        <div class="caract-num">V</div>
+        <div class="caract-title">Prosa Documental</div>
+        <p class="caract-body">Aproximação com o jornalismo e o documento histórico. Textos com base em pesquisa e observação direta da realidade. Euclides da Cunha é o exemplo máximo desta tendência.</p>
+      </div>
+      <div class="caract-item">
+        <div class="caract-num">VI</div>
+        <div class="caract-title">Convivência de Escolas</div>
+        <p class="caract-body">Coexistência do Parnasianismo tardio, do Simbolismo e das novas tendências realistas. Não há uma escola unitária, mas um campo de tensão entre forças estéticas diversas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ARTISTAS -->
+<section id="artistas">
+  <div class="container">
+    <div class="artists-header">
+      <p class="section-label">03 — Protagonistas</p>
+      <h2 class="section-title" style="color:var(--sepia-cream)">Autores & <em style="color:var(--sepia-light)">Artistas</em></h2>
+      <div class="ruled-line"></div>
+    </div>
+    <div class="artists-grid">
+
+      <div class="artist-card">
+        <div class="artist-area">Prosa / Ensaio</div>
+        <div class="artist-name">Euclides da Cunha</div>
+        <span class="artist-years">1866 – 1909</span>
+        <p class="artist-desc">Jornalista, engenheiro e escritor que cobriu a Guerra de Canudos. Seu trabalho de reportagem e análise geográfico-social resultou na obra monumental que fundou a prosa não-ficcional brasileira. Elegeu o sertão como palco da nação real.</p>
+        <div class="artist-obras">
+          <span class="obra-tag">Os Sertões (1902)</span>
+          <span class="obra-tag">À Margem da História</span>
+          <span class="obra-tag">Contrastes e Confrontos</span>
+        </div>
+      </div>
+
+      <div class="artist-card">
+        <div class="artist-area">Prosa / Conto</div>
+        <div class="artist-name">Lima Barreto</div>
+        <span class="artist-years">1881 – 1922</span>
+        <p class="artist-desc">Escritor mulato e pobre que viveu à margem da belle époque carioca. Sua literatura é ácida, irônica e profundamente humana. Denunciou o preconceito racial, o bacharelismo e a hipocrisia das elites com linguagem acessível e voz autêntica.</p>
+        <div class="artist-obras">
+          <span class="obra-tag">Triste Fim de Policarpo Quaresma</span>
+          <span class="obra-tag">Clara dos Anjos</span>
+          <span class="obra-tag">Recordações do Escrivão Isaías Caminha</span>
+        </div>
+      </div>
+
+      <div class="artist-card">
+        <div class="artist-area">Prosa / Romance</div>
+        <div class="artist-name">Graça Aranha</div>
+        <span class="artist-years">1868 – 1931</span>
+        <p class="artist-desc">Diplomata e escritor maranhense que abordou o choque cultural entre imigrantes europeus e a realidade brutal do Brasil profundo. Presidiu a Semana de Arte Moderna de 1922, fazendo a ponte entre os dois períodos literários.</p>
+        <div class="artist-obras">
+          <span class="obra-tag">Canaã (1902)</span>
+          <span class="obra-tag">A Estética da Vida</span>
+          <span class="obra-tag">Chanaan</span>
+        </div>
+      </div>
+
+      <div class="artist-card">
+        <div class="artist-area">Poesia / Simbolismo</div>
+        <div class="artist-name">Augusto dos Anjos</div>
+        <span class="artist-years">1884 – 1914</span>
+        <p class="artist-desc">O "poeta da morte", único em seu gênero. Fundiu o simbolismo com vocabulário científico e uma visão pessimista e materialista da existência. Sua poesia sobre a decomposição e o niilismo é inconfundível em toda a literatura brasileira.</p>
+        <div class="artist-obras">
+          <span class="obra-tag">Eu (1912)</span>
+          <span class="obra-tag">Insônia</span>
+          <span class="obra-tag">Psicologia de um Vencido</span>
+        </div>
+      </div>
+
+      <div class="artist-card">
+        <div class="artist-area">Prosa / Romance</div>
+        <div class="artist-name">Monteiro Lobato</div>
+        <span class="artist-years">1882 – 1948</span>
+        <p class="artist-desc">Criou o personagem-símbolo do caipira brasileiro — o Jeca Tatu — e revolucionou a edição no Brasil. Sua obra adulta é de crítica feroz ao atraso rural e ao parasitismo sanitário. Mais tarde, reinventaria a literatura infantil com o Sítio do Picapau Amarelo.</p>
+        <div class="artist-obras">
+          <span class="obra-tag">Urupês (1918)</span>
+          <span class="obra-tag">Cidades Mortas</span>
+          <span class="obra-tag">O Presidente Negro</span>
+        </div>
+      </div>
+
+      <div class="artist-card">
+        <div class="artist-area">Poesia / Parnasianismo tardio</div>
+        <div class="artist-name">Olavo Bilac</div>
+        <span class="artist-years">1865 – 1918</span>
+        <p class="artist-desc">O "Príncipe dos Poetas" brasileiros, máximo representante do Parnasianismo. Mestre absoluto da forma, da métrica e da precisão vocabular. Embora parnasiano, sua obra atravessa e domina o período pré-modernista pela sua influência e presença cultural.</p>
+        <div class="artist-obras">
+          <span class="obra-tag">Poesias (1888)</span>
+          <span class="obra-tag">Via Láctea</span>
+          <span class="obra-tag">Tarde</span>
+        </div>
+      </div>
+
+      <div class="artist-card">
+        <div class="artist-area">Pintura</div>
+        <div class="artist-name">João do Rio</div>
+        <span class="artist-years">1881 – 1921</span>
+        <p class="artist-desc">Jornalista e escritor carioca que mapeou a vida nas ruas do Rio de Janeiro com olhar etnográfico e sensível. Documentou religiões afro-brasileiras, mendigos, operários e a boemia urbana com uma prosa leve e de grande apelo popular.</p>
+        <div class="artist-obras">
+          <span class="obra-tag">A Alma Encantadora das Ruas</span>
+          <span class="obra-tag">As Religiões no Rio</span>
+          <span class="obra-tag">Dentro da Noite</span>
+        </div>
+      </div>
+
+      <div class="artist-card">
+        <div class="artist-area">Artes Plásticas</div>
+        <div class="artist-name">Eliseu Visconti</div>
+        <span class="artist-years">1866 – 1944</span>
+        <p class="artist-desc">Pintor considerado o precursor do Impressionismo no Brasil. Suas obras rejeitavam o academicismo da Escola Nacional de Belas Artes. Decorou o Theatro Municipal do Rio de Janeiro com afrescos de grande originalidade estética e técnica inovadora.</p>
+        <div class="artist-obras">
+          <span class="obra-tag">Gioventù (1898)</span>
+          <span class="obra-tag">Afrescos do Theatro Municipal</span>
+          <span class="obra-tag">Toilette (1900)</span>
+        </div>
+      </div>
+
+      <div class="artist-card">
+        <div class="artist-area">Artes Plásticas</div>
+        <div class="artist-name">Almeida Júnior</div>
+        <span class="artist-years">1850 – 1899</span>
+        <p class="artist-desc">Pioneiro do Realismo na pintura brasileira. Afastou-se dos temas mitológicos e históricos europeus para retratar o cotidiano do caipira paulista com cores vibrantes e luz solar intensa. Fundou uma identidade visual genuinamente brasileira.</p>
+        <div class="artist-obras">
+          <span class="obra-tag">Caipira Picando Fumo (1893)</span>
+          <span class="obra-tag">O Violeiro (1899)</span>
+          <span class="obra-tag">Amolação Interrompida</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- OBRAS -->
+<section id="obras">
+  <div class="container">
+    <div class="obras-intro">
+      <p class="section-label">04 — Cânone</p>
+      <h2 class="section-title">Obras <em>Fundamentais</em></h2>
+      <div class="ruled-line"></div>
+      <p style="color:var(--sepia-mid);max-width:560px">As obras que definiram o período e que permanecem como referências incontornáveis da literatura e da arte brasileiras.</p>
+    </div>
+    <div class="obras-list">
+      <div class="obra-item">
+        <div class="obra-num">01</div>
+        <div class="obra-info">
+          <div class="obra-title-main">Os Sertões</div>
+          <div class="obra-author">Euclides da Cunha</div>
+          <div class="obra-notes">Reportagem épica sobre a Guerra de Canudos. Divide-se em A Terra, O Homem e A Luta. Fundação da prosa não-ficcional brasileira e análise sociológica pioneira.</div>
+        </div>
+        <div class="obra-year-badge">1902</div>
+      </div>
+      <div class="obra-item">
+        <div class="obra-num">02</div>
+        <div class="obra-info">
+          <div class="obra-title-main">Canaã</div>
+          <div class="obra-author">Graça Aranha</div>
+          <div class="obra-notes">Romance sobre imigrantes alemães no Espírito Santo. Explora o choque entre o idealismo europeu e a brutalidade da realidade tropical brasileira.</div>
+        </div>
+        <div class="obra-year-badge">1902</div>
+      </div>
+      <div class="obra-item">
+        <div class="obra-num">03</div>
+        <div class="obra-info">
+          <div class="obra-title-main">Triste Fim de Policarpo Quaresma</div>
+          <div class="obra-author">Lima Barreto</div>
+          <div class="obra-notes">Sátira ao ufanismo e ao patriotismo ingênuo. Policarpo é um idealista destruído pelo sistema. Lima Barreto expõe a falência dos ideais republicanos brasileiros.</div>
+        </div>
+        <div class="obra-year-badge">1911</div>
+      </div>
+      <div class="obra-item">
+        <div class="obra-num">04</div>
+        <div class="obra-info">
+          <div class="obra-title-main">Eu</div>
+          <div class="obra-author">Augusto dos Anjos</div>
+          <div class="obra-notes">Único livro publicado em vida. Poesia que mistura simbolismo, vocabulário científico e visão pessimista da existência. Linguagem única e inconfundível na literatura brasileira.</div>
+        </div>
+        <div class="obra-year-badge">1912</div>
+      </div>
+      <div class="obra-item">
+        <div class="obra-num">05</div>
+        <div class="obra-info">
+          <div class="obra-title-main">A Alma Encantadora das Ruas</div>
+          <div class="obra-author">João do Rio</div>
+          <div class="obra-notes">Crônicas sobre os tipos urbanos do Rio de Janeiro. Um dos primeiros trabalhos de sociologia urbana na literatura brasileira, retratando mendigos, prostitutas e operários.</div>
+        </div>
+        <div class="obra-year-badge">1908</div>
+      </div>
+      <div class="obra-item">
+        <div class="obra-num">06</div>
+        <div class="obra-info">
+          <div class="obra-title-main">Urupês</div>
+          <div class="obra-author">Monteiro Lobato</div>
+          <div class="obra-notes">Coletânea de contos rurais. Apresenta o Jeca Tatu, símbolo do caipira brasileiro vítima do abandono e da doença. Crítica feroz ao atraso do interior brasileiro.</div>
+        </div>
+        <div class="obra-year-badge">1918</div>
+      </div>
+      <div class="obra-item">
+        <div class="obra-num">07</div>
+        <div class="obra-info">
+          <div class="obra-title-main">Clara dos Anjos</div>
+          <div class="obra-author">Lima Barreto</div>
+          <div class="obra-notes">Romance póstumo sobre uma jovem mulata seduzida e abandonada por um rapaz branco da classe média. Denuncia o racismo estrutural da sociedade brasileira com precisão cortante.</div>
+        </div>
+        <div class="obra-year-badge">1922</div>
+      </div>
+      <div class="obra-item">
+        <div class="obra-num">08</div>
+        <div class="obra-info">
+          <div class="obra-title-main">Recordações do Escrivão Isaías Caminha</div>
+          <div class="obra-author">Lima Barreto</div>
+          <div class="obra-notes">Romance de estreia autobiográfico. Retrata as dificuldades de um jovem mulato talentoso para ascender numa sociedade racista. Sátira à imprensa carioca da Belle Époque.</div>
+        </div>
+        <div class="obra-year-badge">1909</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MOVIMENTOS / ESCOLAS -->
+<section id="movimentos">
+  <div class="container">
+    <p class="section-label">05 — Correntes</p>
+    <h2 class="section-title">Escolas <em>Literárias</em> do Período</h2>
+    <div class="ruled-line"></div>
+    <p style="color:var(--sepia-mid);max-width:620px">O Pré-Modernismo não é uma escola, mas um período de convivência. As correntes estéticas que caracterizam a época:</p>
+    <div class="mov-grid">
+      <div class="mov-card">
+        <div class="mov-card-title">Parnasianismo</div>
+        <div class="mov-card-sub">Escola vigente — em declínio</div>
+        <p>Surgido na segunda metade do séc. XIX, o Parnasianismo preconizava a arte pela arte, a perfeição formal, o verso bem trabalhado e os temas mitológicos greco-latinos. Olavo Bilac, Raimundo Correia e Alberto de Oliveira são seus maiores representantes. No período pré-modernista, já começa a perder força diante das novas demandas sociais.</p>
+      </div>
+      <div class="mov-card">
+        <div class="mov-card-title">Simbolismo</div>
+        <div class="mov-card-sub">Reação ao Parnasianismo</div>
+        <p>O Simbolismo propunha a sugestão em vez da descrição, o subjetivismo, a musicalidade e o espiritualismo em oposição ao materialismo científico. Cruz e Sousa e Alphonsus de Guimaraens são os grandes nomes. O pessimismo de Augusto dos Anjos dialoga com esta escola enquanto a subverte com vocabulário científico brutal.</p>
+      </div>
+      <div class="mov-card">
+        <div class="mov-card-title">Realismo / Naturalismo tardio</div>
+        <div class="mov-card-sub">Herança do séc. XIX</div>
+        <p>O determinismo biológico e social do Naturalismo e o retrato objetivo da realidade do Realismo persistem como influências. Lima Barreto e Graça Aranha herdam a preocupação com a crítica social, mas superando o determinismo fatalista para dar lugar a uma perspectiva mais humanista e engajada politicamente.</p>
+      </div>
+      <div class="mov-card">
+        <div class="mov-card-title">Regionalismo Crítico</div>
+        <div class="mov-card-sub">Tendência emergente</div>
+        <p>A principal inovação do período: literatura voltada para as regiões do Brasil esquecidas pelo poder central. O Nordeste, o sertão, a Amazônia e o interior rural tornam-se palco de obras que desmontam a visão idílica do interior brasileiro e expõem suas contradições com olhar documental e denunciante.</p>
+      </div>
+      <div class="mov-card">
+        <div class="mov-card-title">Jornalismo Literário</div>
+        <div class="mov-card-sub">Novo formato emergente</div>
+        <p>A crônica e a reportagem literária ganham status de gênero. João do Rio e Lima Barreto exemplificam a fusão entre jornalismo e literatura. A imprensa se torna espaço de debate intelectual e veículo de crítica social, democratizando a produção literária.</p>
+      </div>
+      <div class="mov-card">
+        <div class="mov-card-title">Impressionismo nas Artes</div>
+        <div class="mov-card-sub">Pioneirismo plástico</div>
+        <p>Nas artes plásticas, Eliseu Visconti introduz o Impressionismo enquanto a Academia ainda pregava o academicismo europeu. Almeida Júnior estabelece o Realismo nacional na pintura. Estes movimentos plásticos acompanham a efervescência literária e preparam o terreno para a Semana de 22.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CITAÇÃO -->
+<div class="quote-section">
+  <blockquote>
+    <p>O sertanejo é, antes de tudo, um forte. Não tem o raquitismo exaustivo dos mestiços neurastênicos do litoral.</p>
+    <cite>— Euclides da Cunha, Os Sertões (1902)</cite>
+  </blockquote>
+</div>
+
+<!-- HISTÓRIA -->
+<section id="historia">
+  <div class="container">
+    <p class="section-label" style="color:var(--gold)">06 — Cronologia</p>
+    <h2 class="section-title" style="color:var(--sepia-pale)">Contexto <em style="color:var(--sepia-light)">Histórico</em></h2>
+    <div class="ruled-line"></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;margin-top:1rem">
+      <div class="timeline" id="timeline1">
+        <div class="tl-item">
+          <div class="tl-year">1888</div>
+          <div class="tl-event">Lei Áurea — Fim da Escravidão</div>
+          <p class="tl-desc">A abolição sem reparação lança milhares de ex-escravizados à miséria urbana, tema central da literatura de Lima Barreto e João do Rio.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">1889</div>
+          <div class="tl-event">Proclamação da República</div>
+          <p class="tl-desc">O fim do Império cria uma crise de identidade nacional. O que é ser brasileiro? A questão atravessa toda a produção intelectual do período.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">1896–1897</div>
+          <div class="tl-event">Guerra de Canudos</div>
+          <p class="tl-desc">O massacre de Canudos expõe as contradições do Brasil republicano. Euclides da Cunha cobre o conflito e escreve Os Sertões.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">1902</div>
+          <div class="tl-event">Os Sertões e Canaã</div>
+          <p class="tl-desc">No mesmo ano, dois marcos do Pré-Modernismo são publicados. A literatura brasileira volta os olhos para dentro do país.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">1904</div>
+          <div class="tl-event">Revolta da Vacina — Rio de Janeiro</div>
+          <p class="tl-desc">Oswaldo Cruz impõe vacinação obrigatória contra varíola. A população pobre se revolta. Lima Barreto registra o episódio e sua violência.</p>
+        </div>
+      </div>
+      <div class="timeline" id="timeline2">
+        <div class="tl-item">
+          <div class="tl-year">1907</div>
+          <div class="tl-event">Greves Operárias em São Paulo</div>
+          <p class="tl-desc">O movimento operário — composto principalmente por imigrantes — emerge como força política. A questão social chega à literatura.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">1912</div>
+          <div class="tl-event">Augusto dos Anjos publica "Eu"</div>
+          <p class="tl-desc">O único livro do poeta paraibano inaugura uma poesia radicalmente distinta de tudo que se fazia no Brasil, antecipando a ruptura modernista.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">1914–1918</div>
+          <div class="tl-event">Primeira Guerra Mundial</div>
+          <p class="tl-desc">O conflito abala a fé no progresso europeu e nas ideias de civilização. No Brasil, questiona o modelo de modernidade que se pretendia importar.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">1918</div>
+          <div class="tl-event">Monteiro Lobato lança Urupês</div>
+          <p class="tl-desc">O Jeca Tatu se torna símbolo do atraso rural. A figura do caipira miserável e doente contrasta com o ideal de progresso das elites.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">1922</div>
+          <div class="tl-event">Semana de Arte Moderna</div>
+          <p class="tl-desc">O evento no Teatro Municipal de São Paulo inaugura o Modernismo e encerra o Pré-Modernismo como período histórico-literário.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEMAS -->
+<section id="temas">
+  <div class="container">
+    <p class="section-label">07 — Temáticas</p>
+    <h2 class="section-title">Grandes <em>Temas</em> Literários</h2>
+    <div class="ruled-line"></div>
+    <div class="temas-grid">
+      <div class="tema-card">
+        <span class="tema-icon">🌵</span>
+        <div class="tema-name">O Sertão</div>
+        <p class="tema-text">O nordeste árido, a seca, o cangaço e o messianismo como expressões do Brasil profundo e esquecido.</p>
+      </div>
+      <div class="tema-card">
+        <span class="tema-icon">⚖️</span>
+        <div class="tema-name">Crítica Social</div>
+        <p class="tema-text">Denúncia das injustiças, do coronelismo, da exploração dos pobres e da hipocrisia das elites republicanas.</p>
+      </div>
+      <div class="tema-card">
+        <span class="tema-icon">🏙️</span>
+        <div class="tema-name">Vida Urbana</div>
+        <p class="tema-text">O Rio de Janeiro das ruas, dos cortiços, da boemia e dos excluídos retratado com olhar etnográfico.</p>
+      </div>
+      <div class="tema-card">
+        <span class="tema-icon">🤝</span>
+        <div class="tema-name">Identidade Nacional</div>
+        <p class="tema-text">A busca pela definição do que é ser brasileiro após a República e a abolição. Quem somos nós?</p>
+      </div>
+      <div class="tema-card">
+        <span class="tema-icon">💀</span>
+        <div class="tema-name">Pessimismo e Morte</div>
+        <p class="tema-text">A visão materialista e pessimista da existência em Augusto dos Anjos. A morte como tema central e literário.</p>
+      </div>
+      <div class="tema-card">
+        <span class="tema-icon">🌍</span>
+        <div class="tema-name">Imigração</div>
+        <p class="tema-text">O choque entre o sonho europeu e a realidade brasileira. A identidade do imigrante e sua integração conflituosa.</p>
+      </div>
+      <div class="tema-card">
+        <span class="tema-icon">✊</span>
+        <div class="tema-name">Racismo</div>
+        <p class="tema-text">A denúncia do preconceito racial estrutural, especialmente em Lima Barreto, que viveu esse racismo na pele.</p>
+      </div>
+      <div class="tema-card">
+        <span class="tema-icon">🏚️</span>
+        <div class="tema-name">Miséria e Abandono</div>
+        <p class="tema-text">O estado deplorável da saúde pública, a falta de saneamento, o analfabetismo e o abandono do interior.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-brand">Pré-Modernismo Brasileiro</div>
+  <p>Uma janela para a história, a literatura e a arte do Brasil na virada do século.</p>
+  <p>Período de transição que preparou a Revolução Modernista de 1922.</p>
+  <div class="f-years">1900 — 1922</div>
+</footer>
+
+<!-- BACK TO TOP -->
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">▲</button>
+
+<script>
+  // Back to top visibility
+  const backTop = document.getElementById('backTop');
+  window.addEventListener('scroll', () => {
+    backTop.classList.toggle('show', window.scrollY > 400);
+  });
+
+  // Timeline intersection observer
+  const tlItems = document.querySelectorAll('.tl-item');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 120);
+      }
+    });
+  }, { threshold: 0.15 });
+  tlItems.forEach(item => observer.observe(item));
+
+  // Nav active state
+  const sections = document.querySelectorAll('section[id], div[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(sec => {
+      if (window.scrollY >= sec.offsetTop - 120) current = sec.id;
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current
+        ? 'var(--gold-bright)' : '';
+    });
+  });
+
+  // Smooth reveal on scroll for cards
+  const revealItems = document.querySelectorAll('.artist-card, .fact-card, .mov-card, .tema-card, .obra-item');
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.08 });
+
+  revealItems.forEach((item, i) => {
+    item.style.opacity = '0';
+    item.style.transform = 'translateY(20px)';
+    item.style.transition = `opacity 0.6s ${i * 0.04}s, transform 0.6s ${i * 0.04}s`;
+    revealObs.observe(item);
+  });
+</script>
+
+</body>
+</html>
